@@ -3,37 +3,91 @@ import {
     ShoppingBag,
     User,
     ShoppingCart,
-    Gem,
+    BriefcaseBusiness,
     Footprints,
-    Flame,
+    Shirt,
+    Handbag,
+    Crown,
     Grid2X2,
 } from "lucide-react";
 
 export const desktopNavItems = [
     {
-        label: "کیف",
-        href: "/bags",
-        icon: ShoppingBag,
+        label: "مردانه",
+
+        href: "/mens",
+
+        children: [
+            {
+                label: "کیف",
+                href: "/mens/bag",
+                icon: BriefcaseBusiness,
+            },
+
+            {
+                label: "کفش",
+                href: "/mens/shoes",
+                icon: Footprints,
+            },
+
+            {
+                label: "لباس",
+                href: "/mens/cloths",
+                icon: Shirt,
+            },
+        ],
     },
+
     {
-        label: "کفش",
-        href: "/shoes",
-        icon: Footprints,
+        label: "زنانه",
+
+        href: "/womens",
+
+        children: [
+            {
+                label: "کیف",
+                href: "/womens/bag",
+                icon: Handbag,
+            },
+
+            {
+                label: "کفش",
+                href: "/womens/shoes",
+                icon: Footprints,
+            },
+
+            {
+                label: "لباس",
+                href: "/womens/cloths",
+                icon: Shirt,
+            },
+        ],
     },
+
     {
         label: "اکسسوری",
-        href: "/accessories",
-        icon: Gem,
-    },
-    {
-        label: "کلاه",
-        href: "/hot",
-        icon: Flame,
-    },
-    {
-        label: "محصولات",
-        href: "/products",
-        icon: Grid2X2,
+
+        href: "/accessory",
+
+        children: [
+            {
+                label: "کمربند",
+                href: "/accessory/belt",
+                icon: BriefcaseBusiness,
+            },
+
+            {
+                label: "کلاه",
+                href: "/accessory/hats",
+                icon: Crown,
+            },
+
+            {
+                label: "سایر",
+                href: "/accessory/other",
+                icon: Grid2X2,
+            },
+        ],
     },
 ];
 
