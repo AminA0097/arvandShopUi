@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+:root {
+    --bg: #ffffff;
+
+    --surface: #f7f5f3;
+    --surface-2: #efe8e4;
+
+    --primary: #9a8174;
+    --primary-hover: #7e685d;
+
+    --text: #1f1f1f;
+    --text-muted: #6b6b6b;
+
+    --border: rgba(0, 0, 0, 0.08);
+
+    --shadow:
+            0 10px 30px rgba(0, 0, 0, 0.06);
+
+    --radius: 18px;
+
+
+}
+@theme{
+    --font-shabnam: var(--font-shabnam);
+    --font-tanha: var(--font-tanha);
+    --font-tanha-fd: var(--font-tanha-fd);
+    --font-mosalas: var(--font-mosalas);
+}
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* reusable */
+
+.surface {
+    background: var(--surface);
+    border: 1px solid var(--border);
+}
+
+.surface-2 {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.primary-gradient {
+    background:
+            linear-gradient(
+                    135deg,
+                    #9a8174 0%,
+                    #7e685d 100%
+            );
+}
