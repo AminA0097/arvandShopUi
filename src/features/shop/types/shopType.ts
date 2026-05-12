@@ -1,9 +1,28 @@
-export type MainCategory =
+import {string} from "zod";
+
+export type MainCategoryNames =
     | "mens"
     | "womens"
     | "accessory";
 
-export type ProductTag =
+export const categoryLabels: Record<MainCategoryNames, string> = {
+    mens: 'مردانه',
+    womens: 'زنانه',
+    accessory: 'اکسسوری',
+};
+export const tagLabels: Record<string, string> = {
+     premium : "پیشمهاد",
+     leather : "چرم",
+     new : "جدید",
+     hot : "داغ",
+     summer : "تابستونی"
+};
+export interface MainCategory  {
+    id: string;
+    name: MainCategoryNames;
+}
+
+export type ProductType =
     | "bag"
     | "shoes"
     | "cloths"
@@ -11,44 +30,44 @@ export type ProductTag =
     | "hats"
     | "other";
 
+export type Audience =
+    | "mens"
+    | "womens"
+    | "unisex";
+
+export type ProductTag =
+    | "premium"
+    | "leather"
+    | "new"
+    | "hot"
+    | "summer";
+export interface Tag {
+    id: string;
+    name: ProductTag;
+}
 export interface Product {
     id: string;
 
     name: string;
-
     title?: string;
 
-    slug: string;
-
     price: number;
-
     discount: number;
 
-    finalPrice: number;
+    stock: number;
 
     isNew: boolean;
-
     isBestSeller: boolean;
-
-    stock: number;
 
     imgUrl: string;
 
     views: number;
-
     rank: number;
 
     createdAt: string;
 
-    category: {
-        id: string;
-
-        name: MainCategory;
-    };
-
-    tags: {
-        id: string;
-
-        name: ProductTag;
-    }[];
+    category: MainCategory;
+    type: ProductType;
+    audience: Audience;
+    tags: Tag[];
 }
