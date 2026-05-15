@@ -61,11 +61,6 @@ export default async function CategoryTypePage({ params, searchParams }: Props) 
     const products = await getProducts(categoryname, typename as ProductType);
     const productViewModels = mapProductsToViewModels(products);
 
-    const allowedTypes = category.allowedTypes.map((type) => ({
-        value: type,
-        label: TYPE_LABELS[type],
-    }));
-
     const initialFilters = {
         sort: (sort as any) || "latest",
         categories: [categoryname],
@@ -83,9 +78,9 @@ export default async function CategoryTypePage({ params, searchParams }: Props) 
             <div className="flex flex-col lg:flex-row lg:gap-8">
                 <div className="lg:order-2 lg:w-80 xl:w-96">
                     <SidebarFilters
-                        allowedTypes={allowedTypes}
                         initialFilters={initialFilters}
-                        currentCategory={categoryname}
+                        showTypeFilter={false} // مخفی کردن نوع دسته‌بندی
+                        // allowedTypes و currentCategory ارسال نمی‌شوند
                     />
                 </div>
 

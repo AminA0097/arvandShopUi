@@ -2,8 +2,8 @@
 import type { Metadata } from "next";
 import "./global.css";
 import { shabnam, tanha, tanhaFD, mosalas } from '@/shared/utils/fonts';
-import DesktopHeader from "@/shared/components/layout/desktop-header";
-import MobileFooterNav from "@/shared/components/layout/mobile-footer-nav";
+import DesktopHeader from "@/features/home/components/desktop/desktop-header";
+import MobileFooterNav from "@/features/home/components/mobile/mobile-footer-nav";
 
 export const metadata: Metadata = {
     title: "ZENN",

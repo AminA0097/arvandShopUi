@@ -47,7 +47,7 @@ export default function DesktopHeader() {
             >
                 {/* BRAND */}
                 <Link
-                    href="/"
+                    href="/public"
                     className="
             font-shabnam
             text-2xl
@@ -56,7 +56,7 @@ export default function DesktopHeader() {
             text-[#1f1f1f]
           "
                 >
-                    Arvand Leather
+                    چرم آروند
                 </Link>
 
                 {/* NAVIGATION */}

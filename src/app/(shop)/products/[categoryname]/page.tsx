@@ -16,12 +16,13 @@ type Props = {
         search?: string;
         minPrice?: string;
         maxPrice?: string;
+        types?: string; // اضافه شد برای فیلتر نوع
     }>;
 };
 
-async function getProducts(category: string): Promise<Product[]> {
+async function getProducts(category: string, typeFilter?: string[]): Promise<Product[]> {
     // Mock products - replace with your API call
-    return Array.from({ length: 12 }, (_, i) => ({
+    let products = Array.from({ length: 12 }, (_, i) => ({
         id: `${category}-${i + 1}`,
         name: `محصول ${i + 1}`,
         title: `عنوان محصول ${i + 1}`,
@@ -39,11 +40,18 @@ async function getProducts(category: string): Promise<Product[]> {
         audience: "unisex",
         tags: i % 2 === 0 ? [{ id: "t1", name: "premium" as const }] : [],
     }));
+
+    // Apply type filter if provided
+    if (typeFilter && typeFilter.length > 0) {
+        products = products.filter(p => typeFilter.includes(p.type));
+    }
+
+    return products;
 }
 
 export default async function CategoryPage({ params, searchParams }: Props) {
     const { categoryname } = await params;
-    const { sort, stock, search, minPrice, maxPrice } = await searchParams;
+    const { sort, stock, search, minPrice, maxPrice, types } = await searchParams;
 
     const category = CATEGORY_CONFIG[categoryname as keyof typeof CATEGORY_CONFIG];
 
@@ -51,7 +59,10 @@ export default async function CategoryPage({ params, searchParams }: Props) {
         notFound();
     }
 
-    const products = await getProducts(categoryname);
+    // Parse types from URL (comma-separated)
+    const typeFilter = types ? types.split(',') : [];
+
+    const products = await getProducts(categoryname, typeFilter);
     const productViewModels = mapProductsToViewModels(products);
 
     const allowedTypes = category.allowedTypes.map((type) => ({
@@ -62,7 +73,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
     const initialFilters = {
         sort: (sort as any) || "latest",
         categories: [categoryname],
-        types: [],
+        types: typeFilter as ProductType[], // Get types from URL
         stock: (stock as any) || "all",
         minPrice: minPrice ? parseInt(minPrice) : 0,
         maxPrice: maxPrice ? parseInt(maxPrice) : 50_000_000,
@@ -77,6 +88,7 @@ export default async function CategoryPage({ params, searchParams }: Props) {
                         allowedTypes={allowedTypes}
                         initialFilters={initialFilters}
                         currentCategory={categoryname}
+                        showTypeFilter={true} // نمایش نوع دسته‌بندی
                     />
                 </div>
 

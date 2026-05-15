@@ -1,64 +1,29 @@
 // features/shop/components/sideBarContent.tsx
 "use client";
 
-import { useEffect, useState } from "react";
 import { Search } from "lucide-react";
-import MainCategoryDropdown from "./mainCategoryDropdown";
-import TypeFilter from "./typeFilter";
 import SortDropdown from "./sortDropdown";
 import StockFilter from "./stockFilter";
 import PriceSlider from "./priceSlider";
+import TypeFilter from "./typeFilter";
 import { FilterState } from "@/features/shop/types/productType";
-import { ProductType, MainCategoryName } from "@/features/shop/types/productType";
-import { CATEGORY_CONFIG, TYPE_LABELS } from "@/features/shop/types/ProductQuery";
+import { MainCategoryName, ProductType } from "@/features/shop/types/productType";
 
 type Props = {
     filters: FilterState;
     update: <K extends keyof FilterState>(key: K, value: FilterState[K]) => void;
-    allowedTypes: {
-        value: ProductType;
-        label: string;
-    }[];
+    allowedTypes?: { value: ProductType; label: string }[];
+    currentCategory?: MainCategoryName;
+    showTypeFilter?: boolean;
 };
 
-export default function SidebarContent({ filters, update, allowedTypes }: Props) {
-    // State for dynamic allowed types based on selected category
-    const [dynamicAllowedTypes, setDynamicAllowedTypes] = useState(allowedTypes);
-
-    // Update dynamic allowed types when category changes
-    useEffect(() => {
-        const selectedCategory = filters.categories.length > 0 ? filters.categories[0] : null;
-
-        if (selectedCategory) {
-            // Get allowed types for the selected category
-            const categoryTypes = CATEGORY_CONFIG[selectedCategory]?.allowedTypes || [];
-            const newAllowedTypes = categoryTypes.map((type) => ({
-                value: type,
-                label: TYPE_LABELS?.[type] || type,
-            }));
-            setDynamicAllowedTypes(newAllowedTypes);
-        } else {
-            // No category selected, show all types
-            setDynamicAllowedTypes(allowedTypes);
-        }
-    }, [filters.categories, allowedTypes]);
-
-    const handleCategoryChange = (category: MainCategoryName | null) => {
-        if (category) {
-            // Get allowed types for the selected category
-            const newAllowedTypes = CATEGORY_CONFIG[category].allowedTypes;
-            // Clear selected types that are not available in new category
-            const validTypes = filters.types.filter(type =>
-                newAllowedTypes.includes(type as ProductType)
-            );
-            if (validTypes.length !== filters.types.length) {
-                update("types", validTypes);
-            }
-        } else {
-            update("types", []);
-        }
-    };
-
+export default function SidebarContent({
+                                           filters,
+                                           update,
+                                           allowedTypes,
+                                           currentCategory,
+                                           showTypeFilter = false
+                                       }: Props) {
     return (
         <div className="space-y-6 font-shabnam">
             {/* Search */}
@@ -81,25 +46,17 @@ export default function SidebarContent({ filters, update, allowedTypes }: Props)
                 <SortDropdown value={filters.sort} onChange={(v) => update("sort", v)} />
             </div>
 
-            {/* Main Category - Dropdown (single select) */}
-            <div>
-                <label className="text-sm mb-2 block text-stone-700">دسته‌بندی اصلی</label>
-                <MainCategoryDropdown
-                    value={filters.categories}
-                    onChange={(v) => update("categories", v)}
-                    onCategoryChange={handleCategoryChange}
-                />
-            </div>
-
-            {/* Product Type - Dynamic Multi-select */}
-            <div>
-                <label className="text-sm mb-2 block text-stone-700">نوع محصول</label>
-                <TypeFilter
-                    options={dynamicAllowedTypes}
-                    value={filters.types}
-                    onChange={(v) => update("types", v)}
-                />
-            </div>
+            {/* Product Type Filter - فقط در صفحه اصلی category نشان داده شود */}
+            {showTypeFilter && allowedTypes && allowedTypes.length > 0 && (
+                <div>
+                    <label className="text-sm mb-2 block text-stone-700">نوع دسته‌بندی</label>
+                    <TypeFilter
+                        options={allowedTypes}
+                        value={filters.types}
+                        onChange={(v) => update("types", v)}
+                    />
+                </div>
+            )}
 
             {/* Stock */}
             <div>

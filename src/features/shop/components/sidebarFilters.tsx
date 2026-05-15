@@ -7,18 +7,20 @@ import { SlidersHorizontal } from "lucide-react";
 import SidebarContent from "./sideBarContent";
 import MobileFilterSheet from "./mobileFilterSheet";
 import { FilterState, defaultFilters } from "@/features/shop/types/ProductQuery";
+import { MainCategoryName, ProductType } from "@/features/shop/types/productType";
 
 type Props = {
-    allowedTypes: {
-        value: string;
-        label: string;
-    }[];
     initialFilters?: Partial<FilterState>;
+    allowedTypes?: { value: ProductType; label: string }[];
+    currentCategory?: MainCategoryName;
+    showTypeFilter?: boolean; // اضافه شد
 };
 
 export default function SidebarFilters({
+                                           initialFilters,
                                            allowedTypes,
-                                           initialFilters
+                                           currentCategory,
+                                           showTypeFilter = false, // پیش‌فرض false
                                        }: Props) {
     const router = useRouter();
     const pathname = usePathname();
@@ -55,6 +57,11 @@ export default function SidebarFilters({
             params.append("sort", filters.sort);
         }
 
+        // فقط در صورتی که در صفحه اصلی category هستیم و showTypeFilter true است
+        if (showTypeFilter && filters.types.length > 0) {
+            params.append("types", filters.types.join(","));
+        }
+
         if (filters.stock !== "all") {
             params.append("stock", filters.stock);
         }
@@ -78,7 +85,7 @@ export default function SidebarFilters({
 
     const filterCount =
         (filters.categories.length > 0 ? 1 : 0) +
-        (filters.types.length > 0 ? 1 : 0) +
+        (showTypeFilter && filters.types.length > 0 ? 1 : 0) + // فقط در صورت نمایش
         (filters.stock !== "all" ? 1 : 0) +
         (filters.search.length > 0 ? 1 : 0) +
         (filters.minPrice > defaultFilters.minPrice ? 1 : 0) +
@@ -102,10 +109,9 @@ export default function SidebarFilters({
                 </button>
             </div>
 
-            {/* Desktop Sidebar - با قابلیت اسکرول */}
+            {/* Desktop Sidebar */}
             <div className="hidden lg:block sticky top-24">
                 <div className="bg-white rounded-2xl border border-stone-100 shadow-sm flex flex-col max-h-[calc(100vh-120px)]">
-                    {/* Header - sticky */}
                     <div className="flex justify-between items-center p-5 pb-3 border-b border-stone-100 sticky top-0 bg-white rounded-t-2xl z-10">
                         <h3 className="font-bold text-stone-800">فیلترها</h3>
                         {filterCount > 0 && (
@@ -118,16 +124,16 @@ export default function SidebarFilters({
                         )}
                     </div>
 
-                    {/* Scrollable Content */}
                     <div className="flex-1 overflow-y-auto p-5 space-y-6">
                         <SidebarContent
                             filters={filters}
                             update={update}
                             allowedTypes={allowedTypes}
+                            currentCategory={currentCategory}
+                            showTypeFilter={showTypeFilter}
                         />
                     </div>
 
-                    {/* Footer - sticky */}
                     <div className="p-5 pt-3 border-t border-stone-100 sticky bottom-0 bg-white rounded-b-2xl">
                         <button
                             onClick={applyFilters}
@@ -144,7 +150,6 @@ export default function SidebarFilters({
                 </div>
             </div>
 
-            {/* Mobile Filter Sheet */}
             <MobileFilterSheet
                 open={open}
                 onClose={() => setOpen(false)}
@@ -153,6 +158,8 @@ export default function SidebarFilters({
                 onClear={clearFilters}
                 onApply={applyFilters}
                 allowedTypes={allowedTypes}
+                currentCategory={currentCategory}
+                showTypeFilter={showTypeFilter}
             />
         </>
     );

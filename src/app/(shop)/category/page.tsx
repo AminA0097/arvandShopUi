@@ -52,69 +52,69 @@ export default function ProductMobileCategories() {
                 </p>
 
                 {/* Features */}
-                <div className="flex flex-wrap justify-center gap-8 mt-10">
-                    {[
-                        {
-                            icon: Truck,
-                            label: "ارسال رایگان",
-                            desc: "برای سفارش‌های ویژه",
-                        },
-                        {
-                            icon: Shield,
-                            label: "ضمانت اصالت",
-                            desc: "بازگشت تا ۷ روز",
-                        },
-                        {
-                            icon: Sparkles,
-                            label: "چرم طبیعی",
-                            desc: "کیفیت ممتاز",
-                        },
-                    ].map((feature, i) => (
-                        <motion.div
-                            key={feature.label}
-                            initial={{ opacity: 0, y: 14 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
-                            className="flex items-center gap-3"
-                        >
-                            <div
-                                className="
-                                    p-3
-                                    rounded-2xl
-                                    bg-[var(--surface)]
-                                    border
-                                    border-[var(--border)]
-                                    text-[var(--primary)]
-                                "
-                            >
-                                <feature.icon size={20} />
-                            </div>
-
-                            <div className="text-right">
-                                <p
-                                    className="
-                                        text-sm
-                                        font-bold
-                                        text-[var(--text)]
-                                        font-shabnam
-                                    "
-                                >
-                                    {feature.label}
-                                </p>
-
-                                <p
-                                    className="
-                                        text-xs
-                                        text-[var(--text-muted)]
-                                        font-shabnam
-                                    "
-                                >
-                                    {feature.desc}
-                                </p>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
+                {/*<div className="flex flex-wrap justify-center gap-8 mt-10">*/}
+                {/*    {[*/}
+                {/*        {*/}
+                {/*            icon: Truck,*/}
+                {/*            label: "ارسال رایگان",*/}
+                {/*            desc: "برای سفارش‌های ویژه",*/}
+                {/*        },*/}
+                {/*        {*/}
+                {/*            icon: Shield,*/}
+                {/*            label: "ضمانت اصالت",*/}
+                {/*            desc: "بازگشت تا ۷ روز",*/}
+                {/*        },*/}
+                {/*        {*/}
+                {/*            icon: Sparkles,*/}
+                {/*            label: "چرم طبیعی",*/}
+                {/*            desc: "کیفیت ممتاز",*/}
+                {/*        },*/}
+                {/*    ].map((feature, i) => (*/}
+                {/*        <motion.div*/}
+                {/*            key={feature.label}*/}
+                {/*            initial={{ opacity: 0, y: 14 }}*/}
+                {/*            animate={{ opacity: 1, y: 0 }}*/}
+                {/*            transition={{ delay: i * 0.1 }}*/}
+                {/*            className="flex items-center gap-3"*/}
+                {/*        >*/}
+                {/*            <div*/}
+                {/*                className="*/}
+                {/*                    p-3*/}
+                {/*                    rounded-2xl*/}
+                {/*                    bg-[var(--surface)]*/}
+                {/*                    border*/}
+                {/*                    border-[var(--border)]*/}
+                {/*                    text-[var(--primary)]*/}
+                {/*                "*/}
+                {/*            >*/}
+                {/*                <feature.icon size={20} />*/}
+                {/*            </div>*/}
+                
+                {/*            <div className="text-right">*/}
+                {/*                <p*/}
+                {/*                    className="*/}
+                {/*                        text-sm*/}
+                {/*                        font-bold*/}
+                {/*                        text-[var(--text)]*/}
+                {/*                        font-shabnam*/}
+                {/*                    "*/}
+                {/*                >*/}
+                {/*                    {feature.label}*/}
+                {/*                </p>*/}
+                
+                {/*                <p*/}
+                {/*                    className="*/}
+                {/*                        text-xs*/}
+                {/*                        text-[var(--text-muted)]*/}
+                {/*                        font-shabnam*/}
+                {/*                    "*/}
+                {/*                >*/}
+                {/*                    {feature.desc}*/}
+                {/*                </p>*/}
+                {/*            </div>*/}
+                {/*        </motion.div>*/}
+                {/*    ))}*/}
+                {/*</div>*/}
             </motion.div>
 
             {/* Categories */}
