@@ -86,8 +86,8 @@ export const mobileNavItems = [
         icon: House,
     },
     {
-        label: "محصولات",
-        href: "/products",
+        label: "دسته بندی",
+        href: "/category",
         icon: ShoppingBag,
     },
     {
