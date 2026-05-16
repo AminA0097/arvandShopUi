@@ -1,7 +1,7 @@
 // app/page.tsx
 
 import MobileHome from "@/features/home/components/mobile/mobileHome";
-// import DesktopHome from "@/features/home/components/desktop/desktop-home";
+import DesktopHome from "@/features/home/components/desktop/desktopHome";
 
 export default function HomePage() {
     return (
@@ -11,10 +11,10 @@ export default function HomePage() {
                 <MobileHome />
             </div>
 
-            {/*/!* desktop *!/*/}
-            {/*<div className="hidden lg:block">*/}
-            {/*    <DesktopHome />*/}
-            {/*</div>*/}
+            {/* desktop */}
+            <div className="hidden lg:block">
+                <DesktopHome />
+            </div>
         </>
     );
 }

@@ -47,7 +47,7 @@ export default function DesktopHeader() {
             >
                 {/* BRAND */}
                 <Link
-                    href="/public"
+                    href="/"
                     className="
             font-shabnam
             text-2xl
