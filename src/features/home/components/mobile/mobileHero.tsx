@@ -1,108 +1,110 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function MobileHero() {
+type HeroItem = {
+    id: number;
+    title: string;
+    description?: string | null;
+    backgroundImage: string;
+    href?: string | null;
+    duration?: number;
+};
+
+export default function MobileHero({ items }: { items: HeroItem[] }) {
+
+    const [index, setIndex] = useState(0);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+    const item = items[index];
+    const duration = item.duration ?? 5000;
+
+    const clear = () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
+    };
+
+    const start = () => {
+        clear();
+        timerRef.current = setTimeout(() => {
+            setIndex((p) => (p + 1) % items.length);
+        }, duration);
+    };
+
+    useEffect(() => {
+        start();
+        return clear;
+    }, [index]);
+
+    const next = () => setIndex((p) => (p + 1) % items.length);
+    const prev = () => setIndex((p) => (p - 1 + items.length) % items.length);
+
     return (
-        <section className="px-4 pt-6">
-            <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7 }}
-                className="
-                    relative
-                    overflow-hidden
-                    rounded-[32px]
-                "
-            >
-                {/* image */}
-                <div className="relative aspect-[4/5]">
-                    <img
-                        src="/images/womens-category.jpg"
-                        alt="Arvand Leather"
-                        className="h-full w-full object-cover"
-                    />
+        <section
+            dir="rtl"
+            className="relative w-full h-[420px] md:hidden overflow-hidden rounded-[var(--radius)]"
+        >
 
-                    {/* overlay */}
-                    <div
-                        className="
-                            absolute
-                            inset-0
-                            bg-gradient-to-t
-                            from-black/75
-                            via-black/20
-                            to-transparent
-                        "
-                    />
-                </div>
+            {/* progress */}
+            <div dir="rtl" className="absolute top-3 left-3 right-3 flex gap-1 z-30">
+                {items.map((_, i) => (
+                    <div key={i} className="flex-1 h-[3px] bg-white/30 overflow-hidden">
 
-                {/* content */}
-                <div
-                    className="
-                        absolute
-                        inset-x-0
-                        bottom-0
-                        p-6
-                    "
-                >
-                    <motion.h1
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.2 }}
-                        className="
-                            text-3xl
-                            font-light
-                            leading-relaxed
-                            text-white
-                        "
-                    >
-                        چرم آروند
-                    </motion.h1>
+                        {i === index && (
+                            <motion.div
+                                key={index}
+                                initial={{ scaleX: 0 }}
+                                animate={{ scaleX: 1 }}
+                                transition={{ duration: duration / 1000, ease: "linear" }}
+                                className="h-full origin-right"
+                                style={{ background: "var(--primary)" }}
+                            />
+                        )}
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="
-                            mt-2
-                            max-w-xs
-                            text-sm
-                            leading-7
-                            text-white/80
-                        "
-                    >
-                        طراحی مدرن با چرم طبیعی برای
-                        استایل روزمره و مینیمال.
-                    </motion.p>
+                        {i < index && (
+                            <div
+                                className="h-full"
+                                style={{ background: "var(--primary)" }}
+                            />
+                        )}
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 16 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
-                        className="mt-5"
-                    >
-                        <Link
-                            href="/category"
-                            className="
-                                inline-flex
-                                items-center
-                                justify-center
-                                rounded-2xl
-                                bg-white
-                                px-5
-                                py-3
-                                text-sm
-                                text-black
-                                transition
-                                hover:bg-white/90
-                            "
-                        >
-                            مشاهده کالکشن
-                        </Link>
-                    </motion.div>
-                </div>
-            </motion.div>
+                    </div>
+                ))}
+            </div>
+
+            <Image
+                src={item.backgroundImage}
+                alt={item.title}
+                fill
+                className="object-cover"
+            />
+
+            <div className="absolute inset-0 hero-overlay" />
+
+            <div className="absolute bottom-10 right-6 left-6 text-white space-y-3">
+
+                <h2 className="text-2xl font-bold leading-snug">
+                    {item.title}
+                </h2>
+
+                {item.description && (
+                    <p className="text-white/90 text-sm">
+                        {item.description}
+                    </p>
+                )}
+
+                {item.href && (
+                    <Link href={item.href} className="hero-link">
+                        مشاهده بیشتر
+                        <span className="text-lg">←</span>
+                    </Link>
+                )}
+
+            </div>
+
         </section>
+
     );
 }

@@ -1,110 +1,106 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 
 type HeroItem = {
     id: number;
     title: string;
-    description: string;
+    description?: string | null;
     backgroundImage: string;
-    floatingImage: string;
-    badge: string;
-    coupon: string;
-    location: string;
-    date: string;
-    href: string;
-    button: string;
+    floatingImage?: string | null;
+    badge?: string | null;
+    href?: string | null;
+    duration?: number;
 };
 
 export default function HeroSlider({ items }: { items: HeroItem[] }) {
     const [index, setIndex] = useState(0);
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-    const next = () => {
-        setIndex((prev) => (prev + 1) % items.length);
+    const item = items[index];
+    const duration = item.duration ?? 5000;
+
+    const clear = () => {
+        if (timerRef.current) clearTimeout(timerRef.current);
     };
 
-    const prev = () => {
-        setIndex((prev) => (prev - 1 + items.length) % items.length);
+    const start = () => {
+        clear();
+        timerRef.current = setTimeout(() => {
+            setIndex((p) => (p + 1) % items.length);
+        }, duration);
     };
 
     useEffect(() => {
-        const interval = setInterval(next, 5000);
-        return () => clearInterval(interval);
-    }, [items.length]);
+        start();
+        return clear;
+    }, [index]);
 
-    const item = items[index];
+    const next = () => setIndex((p) => (p + 1) % items.length);
+    const prev = () => setIndex((p) => (p - 1 + items.length) % items.length);
 
     return (
-        <section className="relative w-full h-[520px] overflow-hidden">
+        <section
+            dir="rtl"
+            className="relative w-full h-[520px] overflow-hidden hidden md:block rounded-[var(--radius)]"
+        >
 
-            {/* background */}
+            {/* progress */}
+            <div className="absolute top-0 left-0 w-full h-[4px] bg-white/20 z-30">
+                <motion.div
+                    key={index}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: duration / 1000, ease: "linear" }}
+                    className="h-full origin-right"
+                    style={{ background: "var(--primary)" }}
+                />
+            </div>
+
             <Image
                 src={item.backgroundImage}
                 alt={item.title}
                 fill
-                className="object-cover transition-all duration-700"
+                className="object-cover"
             />
 
-            <div className="absolute inset-0 bg-black/40" />
+            <div className="absolute inset-0 hero-overlay" />
 
             <div className="relative z-10 max-w-6xl mx-auto h-full flex items-center px-6">
 
-                {/* text */}
                 <div className="text-white max-w-lg space-y-4">
-          <span className="bg-white/20 px-3 py-1 rounded">
-            {item.badge}
-          </span>
 
-                    <h1 className="text-4xl font-bold">
+                    {item.badge && (
+                        <span className="hero-badge">
+          {item.badge}
+        </span>
+                    )}
+
+                    <h2 className="text-4xl md:text-5xl font-bold leading-tight">
                         {item.title}
-                    </h1>
+                    </h2>
 
-                    <p className="text-gray-200">
-                        {item.description}
-                    </p>
+                    {item.description && (
+                        <p className="text-white/85 text-lg">
+                            {item.description}
+                        </p>
+                    )}
 
-                    <div className="flex gap-4 text-sm text-gray-200">
-                        <span>📍 {item.location}</span>
-                        <span>⏳ {item.date}</span>
-                        <span>🎟 {item.coupon}</span>
-                    </div>
+                    {item.href && (
+                        <Link href={item.href} className="hero-link">
+                            مشاهده بیشتر
+                            <span className="text-xl">←</span>
+                        </Link>
+                    )}
 
-                    <Link
-                        href={item.href}
-                        className="inline-block mt-4 bg-white text-black px-6 py-3 rounded-lg font-semibold"
-                    >
-                        {item.button}
-                    </Link>
                 </div>
 
-                {/* floating image */}
-                <div className="hidden md:block ml-auto">
-                    <Image
-                        src={item.floatingImage}
-                        alt={item.title}
-                        width={420}
-                        height={420}
-                        className="rounded-xl shadow-xl"
-                    />
-                </div>
             </div>
 
-            {/* arrows */}
-            <button
-                onClick={prev}
-                className="absolute left-5 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur px-4 py-2 rounded"
-            >
-                ←
-            </button>
-
-            <button
-                onClick={next}
-                className="absolute right-5 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur px-4 py-2 rounded"
-            >
-                →
-            </button>
         </section>
+
     );
 }

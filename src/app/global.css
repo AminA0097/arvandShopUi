@@ -102,3 +102,33 @@ select {
 .embla__container {
     display: flex;
 }
+.hero-overlay {
+    background: linear-gradient(
+            to top,
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.2),
+            rgba(0,0,0,0.05)
+    );
+}
+
+.hero-link {
+    color: white;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all .25s ease;
+}
+
+.hero-link:hover {
+    gap: 10px;
+    color: var(--primary);
+}
+
+.hero-badge {
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(6px);
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+}
