@@ -12,15 +12,12 @@ type Props = {
     index: number;
 };
 
-export default function HomeProductCard({
-                                            product,
-                                            index,
-                                        }: Props) {
+export default function HomeProductCard({ product, index }: Props) {
     return (
         <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.05 }}
+            transition={{ delay: index * 0.04 }}
             className="h-full"
         >
             <Link
@@ -29,179 +26,150 @@ export default function HomeProductCard({
             >
                 <article
                     className="
-                        h-full
-                        overflow-hidden
-                        rounded-[28px]
-                        border
-                        border-[var(--border)]
-                        bg-white
-                        shadow-[var(--shadow)]
-                        transition-all
-                        duration-300
-                        active:scale-[0.98]
-                    "
+          h-full
+          overflow-hidden
+          rounded-2xl
+          border
+          border-[var(--border)]
+          bg-white
+          shadow-sm
+          transition
+          duration-300
+          hover:shadow-md
+          active:scale-[0.98]
+        "
                 >
                     {/* image */}
-                    <div
-                        className="
-                            relative
-                            aspect-[4/5]
-                            overflow-hidden
-                            bg-[var(--surface)]
-                        "
-                    >
+                    <div className="relative aspect-[4/5] overflow-hidden bg-[var(--surface)]">
                         <Image
                             src={product.imgUrl}
                             alt={product.name}
                             fill
                             className="
-                                object-cover
-                                transition-transform
-                                duration-500
-                                group-hover:scale-105
-                            "
+              object-cover
+              transition-transform
+              duration-500
+              group-hover:scale-105
+            "
                         />
 
                         {/* badges */}
-                        <div className="absolute right-3 top-3 flex flex-col gap-2">
+                        <div className="absolute right-2 top-2 flex flex-col gap-1">
+
                             {product.isNew && (
-                                <div
+                                <span
                                     className="
-                                        rounded-full
-                                        bg-white/90
-                                        px-3
-                                        py-1
-                                        text-[10px]
-                                        text-[var(--text)]
-                                        backdrop-blur
-                                    "
+                  rounded-full
+                  bg-white/90
+                  px-2
+                  py-[2px]
+                  text-[9px]
+                  text-[var(--text)]
+                  backdrop-blur
+                "
                                 >
-                                    جدید
-                                </div>
+                  جدید
+                </span>
                             )}
 
                             {product.hasDiscount && (
-                                <div
+                                <span
                                     className="
-                                        rounded-full
-                                        bg-[var(--primary)]
-                                        px-3
-                                        py-1
-                                        text-[10px]
-                                        text-white
-                                    "
+                  rounded-full
+                  bg-[var(--primary)]
+                  px-2
+                  py-[2px]
+                  text-[9px]
+                  text-white
+                "
                                 >
-                                    %{product.discountPercent}
-                                </div>
+                  %{product.discountPercent}
+                </span>
                             )}
+
                         </div>
                     </div>
 
                     {/* content */}
-                    <div className="space-y-3 p-4">
-                        {/* category */}
-                        <div className="flex items-center justify-between">
-                            <span
-                                className="
-                                    text-xs
-                                    text-[var(--text-muted)]
-                                "
-                            >
-                                {product.categoryLabel}
-                            </span>
+                    <div className="space-y-2 p-3">
 
-                            <span
-                                className="
-                                    flex
-                                    items-center
-                                    gap-1
-                                    text-xs
-                                    text-[var(--text-muted)]
-                                "
-                            >
-                                <Eye size={14} />
+                        {/* category + views */}
+                        <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
+                            <span>{product.categoryLabel}</span>
+
+                            <span className="flex items-center gap-1">
+                <Eye size={12} />
                                 {product.views}
-                            </span>
+              </span>
                         </div>
 
                         {/* title */}
                         <h3
                             className="
-                                line-clamp-1
-                                text-sm
-                                font-bold
-                                leading-7
-                                text-[var(--text)]
-                            "
+              line-clamp-1
+              text-[13px]
+              font-semibold
+              text-[var(--text)]
+              transition
+              group-hover:text-[var(--primary)]
+            "
                         >
                             {product.name}
                         </h3>
 
                         {/* tags */}
-                        <div className="flex flex-wrap gap-2">
-                            {product.tagLabels
-                                .slice(0, 2)
-                                .map((tag) => (
-                                    <span
-                                        key={tag}
-                                        className="
-                                            rounded-full
-                                            bg-[var(--surface)]
-                                            px-2.5
-                                            py-1
-                                            text-[10px]
-                                            text-[var(--text-muted)]
-                                        "
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
+                        <div className="flex flex-wrap gap-1">
+                            {product.tagLabels.slice(0, 2).map((tag) => (
+                                <span
+                                    key={tag}
+                                    className="
+                  rounded-full
+                  bg-[var(--surface)]
+                  px-2
+                  py-[2px]
+                  text-[9px]
+                  text-[var(--text-muted)]
+                "
+                                >
+                  {tag}
+                </span>
+                            ))}
                         </div>
 
-                        {/* footer */}
+                        {/* price */}
                         <div className="flex items-end justify-between pt-1">
-                            <div>
+
+                            <div className="leading-tight">
                                 {product.hasDiscount && (
-                                    <p
-                                        className="
-                                            text-xs
-                                            text-[var(--text-muted)]
-                                            line-through
-                                        "
-                                    >
+                                    <p className="text-[10px] text-[var(--text-muted)] line-through">
                                         {product.originalPrice.toLocaleString()}
                                     </p>
                                 )}
 
-                                <p
-                                    className="
-                                        text-base
-                                        font-bold
-                                        text-[var(--text)]
-                                    "
-                                >
+                                <p className="text-[14px] font-bold text-[var(--primary)]">
                                     {product.finalPrice.toLocaleString()}
                                 </p>
                             </div>
 
                             {product.isBestSeller && (
-                                <div
+                                <span
                                     className="
-                                        flex
-                                        items-center
-                                        gap-1
-                                        rounded-full
-                                        bg-amber-50
-                                        px-2.5
-                                        py-1
-                                        text-[10px]
-                                        text-amber-700
-                                    "
+                  flex
+                  items-center
+                  gap-1
+                  rounded-full
+                  bg-amber-50
+                  px-2
+                  py-[2px]
+                  text-[9px]
+                  text-amber-700
+                "
                                 >
-                                    <Sparkles size={12} />
-                                    پرفروش
-                                </div>
+                  <Sparkles size={10} />
+                  پرفروش
+                </span>
                             )}
+
                         </div>
                     </div>
                 </article>

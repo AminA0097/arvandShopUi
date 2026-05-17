@@ -1,0 +1,118 @@
+.hotDealsSection{
+    padding:0 16px;
+    margin-top:40px;
+}
+
+.hotDealsHeader{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+}
+
+.hotDealsTitle{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:18px;
+    color:var(--text);
+    font-family:var(--font-shabnam);
+}
+
+.hotDealsMore{
+    font-size:13px;
+    color:var(--primary);
+    transition:.2s;
+    font-family: var(--font-shabnam);
+}
+
+.hotDealsMore:hover{
+    opacity:.7;
+}
+
+.hotDealCard{
+    position:relative;
+    display:block;
+    overflow:hidden;
+    border-radius:20px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    box-shadow:var(--shadow);
+    transition:.35s;
+}
+
+.hotDealCard:hover{
+    transform:translateY(-4px);
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+.hotDealImage{
+    position:relative;
+    height:160px;
+    overflow:hidden;
+}
+
+.hotDealImg{
+    object-fit:cover;
+    transition:transform .6s;
+}
+
+.hotDealCard:hover .hotDealImg{
+    transform:scale(1.1);
+}
+
+.hotDealBadge{
+    position:absolute;
+    top:10px;
+    right:10px;
+    display:flex;
+    align-items:center;
+    gap:3px;
+    background:var(--primary);
+    color:white;
+    font-size:11px;
+    padding:4px 6px;
+    border-radius:6px;
+    z-index:5;
+    font-family: var(--font-tanha-fd);
+}
+
+.hotDealContent{
+    padding:10px;
+    backdrop-filter:blur(8px);
+    background:rgba(255,255,255,.55);
+    font-family: var(--font-shabnam);
+}
+
+.dark .hotDealContent{
+    background:rgba(0,0,0,.35);
+}
+
+.hotDealContent h3{
+    font-size:13px;
+    color:var(--text);
+    line-height:1.4;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.hotDealPrice{
+    display:flex;
+    gap:6px;
+    margin-top:6px;
+    align-items:center;
+}
+
+.hotDealPrice .price{
+    font-weight:700;
+    color:var(--primary);
+    font-size:14px;
+    font-family: var(--font-tanha-fd);
+}
+
+.hotDealPrice .old{
+    font-size:11px;
+    text-decoration:line-through;
+    color:var(--text-muted);
+}

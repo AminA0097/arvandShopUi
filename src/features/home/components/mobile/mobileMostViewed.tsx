@@ -1,14 +1,16 @@
 "use client";
 
-import HomeProductSlider from "./homeProductSlider";
 import { mostViewedProducts } from "./mock";
+import HomeSliderSection from "./homeProductSlider";
 
 export default function MobileMostViewed() {
     return (
-        <HomeProductSlider
+        <HomeSliderSection
             title="پربازدیدترین‌ها"
             href="/products/most-viewed"
             products={mostViewedProducts}
+            icon="view"
         />
+
     );
 }

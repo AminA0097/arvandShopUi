@@ -9,6 +9,8 @@ export default function MobileNewsSection() {
             title="جدیدترین‌ها"
             href="/products/new"
             products={newestProducts}
+            icon="new"
         />
+
     );
 }
