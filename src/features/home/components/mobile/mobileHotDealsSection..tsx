@@ -45,13 +45,12 @@ export default function MobileHotDealsSection({
             {/* header */}
             <div className="hotDealsHeader">
                 <h2 className="hotDealsTitle">
-                    <Flame size={18} />
+                    <Flame size={18}
+                           className="text-[var(--primary)]"/>
                     پرتخفیف‌ها
                 </h2>
 
-                <Link href="/products?sort=discount" className="hotDealsMore">
-                    مشاهده همه
-                </Link>
+
             </div>
 
             <Swiper
@@ -59,33 +58,26 @@ export default function MobileHotDealsSection({
                 spaceBetween={14}
                 slidesPerView={2.15}
                 dir="rtl"
-
                 autoplay={{
                     delay: 3200,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                 }}
-
                 onSwiper={(swiper) => {
                     swiperRef.current = swiper;
                 }}
-
                 onTouchStart={() => {
                     swiperRef.current?.autoplay.stop();
                 }}
-
                 onTouchEnd={() => {
                     restartAutoplay();
                 }}
-
                 onSlideChange={() => {
                     restartAutoplay();
                 }}
-
                 onMouseEnter={() => {
                     swiperRef.current?.autoplay.stop();
                 }}
-
                 onMouseLeave={() => {
                     restartAutoplay();
                 }}
@@ -99,6 +91,7 @@ export default function MobileHotDealsSection({
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.06 }}
                             viewport={{ once: true }}
+                            className="h-full"
                         >
 
                             <Link
@@ -123,19 +116,23 @@ export default function MobileHotDealsSection({
                                 </div>
 
                                 <div className="hotDealContent">
+
                                     <h3>{product.name}</h3>
 
                                     <div className="hotDealPrice">
-                    <span className="price">
-                      {product.price.toLocaleString()}
-                    </span>
+
+                            <span className="price">
+                                {product.price.toLocaleString()}
+                            </span>
 
                                         {product.oldPrice && (
                                             <span className="old font-tanha-fd">
-                        {product.oldPrice.toLocaleString()}
-                      </span>
+                                    {product.oldPrice.toLocaleString()}
+                                </span>
                                         )}
+
                                     </div>
+
                                 </div>
 
                             </Link>
@@ -144,6 +141,111 @@ export default function MobileHotDealsSection({
 
                     </SwiperSlide>
                 ))}
+
+                {/* MORE CARD */}
+                <SwiperSlide>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 25 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.15 }}
+                        viewport={{ once: true }}
+                        className="h-full"
+                    >
+
+                        <Link
+                            href="/products?sort=discount"
+                            className="
+                    group
+                    relative
+                    flex
+                    min-h-[100%]
+                    h-full
+                    flex-col
+                    items-center
+                    justify-center
+                    overflow-hidden
+                    rounded-[28px]
+                    border
+                    border-[var(--border)]
+                    bg-[var(--surface)]
+                    shadow-[var(--shadow)]
+                    px-5
+                    py-10
+                "
+                        >
+
+                            {/* glow */}
+                            <div
+                                className="
+                        absolute
+                        h-44
+                        w-44
+                        rounded-full
+                        bg-[var(--primary)]/10
+                        blur-3xl
+                    "
+                            />
+
+                            <div
+                                className="
+                        relative
+                        z-10
+                        flex
+                        flex-col
+                        items-center
+                        text-center
+                    "
+                            >
+
+                                <div
+                                    className="
+                            mb-4
+                            flex
+                            h-14
+                            w-14
+                            items-center
+                            justify-center
+                            rounded-2xl
+                            bg-[var(--primary)]
+                            text-white
+                            transition-transform
+                            duration-300
+                            group-hover:scale-105
+                        "
+                                >
+                                    <Flame size={22} />
+                                </div>
+
+                                <span
+                                    className="
+                            text-sm
+                            font-bold
+                            text-[var(--text)]
+                            font-shabnam
+                        "
+                                >
+                        مشاهده همه تخفیف‌ها
+                    </span>
+
+                                <span
+                                    className="
+                            mt-1
+                            text-xs
+                            text-[var(--text-muted)]
+                        "
+                                >
+                        ورود به کالکشن ویژه
+                    </span>
+
+                            </div>
+
+                        </Link>
+
+                    </motion.div>
+
+                </SwiperSlide>
+
             </Swiper>
         </section>
     );
