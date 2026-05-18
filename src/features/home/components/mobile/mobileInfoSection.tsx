@@ -31,53 +31,7 @@ export default function MobileInfoSection() {
     return (
         <section className="mt-14 pb-10">
             {/* features */}
-            <div className="flex flex-wrap justify-center gap-8">
-                {features.map((feature, i) => (
-                    <motion.div
-                        key={feature.label}
-                        initial={{ opacity: 0, y: 14 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        className="flex items-center gap-3"
-                    >
-                        <div
-                            className="
-                                rounded-2xl
-                                border
-                                border-[var(--border)]
-                                bg-[var(--surface)]
-                                p-3
-                                text-[var(--primary)]
-                            "
-                        >
-                            <feature.icon size={20} />
-                        </div>
 
-                        <div className="text-right">
-                            <p
-                                className="
-                                    font-shabnam
-                                    text-sm
-                                    font-bold
-                                    text-[var(--text)]
-                                "
-                            >
-                                {feature.label}
-                            </p>
-
-                            <p
-                                className="
-                                    font-shabnam
-                                    text-xs
-                                    text-[var(--text-muted)]
-                                "
-                            >
-                                {feature.desc}
-                            </p>
-                        </div>
-                    </motion.div>
-                ))}
-            </div>
 
             {/* social + contact */}
             <div

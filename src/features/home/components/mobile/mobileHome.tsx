@@ -4,10 +4,14 @@ import HeroWrapper from "./heroWrapper";
 import MobileMostViewed from "./mobileMostViewed";
 import MobileInfoSection from "./mobileInfoSection";
 import MobileNewsSection from "./mobileNewsSection";
+
 import FlashDeal from "@/features/home/components/mobile/flashDeal";
 import MobileHotDealsSection from "@/features/home/components/mobile/mobileHotDealsSection.";
+import MobileTrustStrip from "@/features/home/components/mobile/mobileTrustStrip";
 
+import { dealProducts , newProducts , mostViewedProducts } from "./mock"
 /* ---- mock API response ---- */
+
 const heroResponse = {
     type: "event",
     payload: {
@@ -16,25 +20,15 @@ const heroResponse = {
         description: "تجربه‌ای متفاوت از طراحی‌های جدید",
         backgroundImage: "/images/event.jpg",
         href: null,
-        badge: " رویداد حضوری",
+        badge: "رویداد حضوری",
         location: "تهران",
         date: "2 تا 8 خرداد",
         coupon: "FALL25",
         eventStart: "2026-05-23T18:00:00",
-        btnText : null
+        btnText: null,
     },
-    // type: "banner",
-    // payload: {
-    //     id: "banner-3001",
-    //     title: "بهش هدیه اختصاصی بده",
-    //     description:
-    //         "تهیه ست های هدیه با قیمت مناسب",
-    //     backgroundImage: "/banner/banner.webp",
-    //     href: "/collections/new-arrivals",
-    //     btnText : "مشاهده بسته ها",
-    //     badge: null,
-    // },
 } as const;
+
 interface Productt {
     id: string;
     name: string;
@@ -43,6 +37,7 @@ interface Productt {
     image: string;
     discount?: number;
 }
+
 export const mockProducts: Productt[] = [
     {
         id: "1",
@@ -76,54 +71,44 @@ export const mockProducts: Productt[] = [
         discount: 21,
         image: "/products/bag-2.jpg",
     },
-    {
-        id: "5",
-        name: "کیف کمری چرم طبیعی",
-        price: 980000,
-        oldPrice: 1180000,
-        discount: 16,
-        image: "/products/bag-3.jpg",
-    },
-    {
-        id: "6",
-        name: "دستبند چرم مردانه مینیمال",
-        price: 240000,
-        image: "/products/accessory-3.jpg",
-    },
-    {
-        id: "7",
-        name: "کفش بوت",
-        price: 310000,
-        oldPrice: 390000,
-        discount: 20,
-        image: "/products/boot-1.jpg",
-    },
-    {
-        id: "8",
-        name: "کاپشن",
-        price: 720000,
-        oldPrice: 890000,
-        discount: 19,
-        image: "/products/jacket-2.jpg",
-    },
 ];
+
 export default function MobileHome() {
     return (
-        <div className="min-h-screen bg-[var(--bg)]">
-            <div className="space-y-8 px-4 py-6">
+        <div className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
 
-                <HeroWrapper hero={heroResponse} />
+            {/* background */}
+            <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                <div className="absolute left-[-80px] top-32 h-72 w-72 rounded-full bg-[var(--primary)]/5 blur-3xl" />
+                <div className="absolute right-[-120px] top-[40%] h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+            </div>
+
+            <div className="relative z-10 px-4 pb-16 pt-5 space-y-10">
+
+                {/* 1. HOOK */}
+                <div className="space-y-5">
+                    <HeroWrapper hero={heroResponse} />
+                    <MobileTrustStrip />
+                </div>
+
+                {/* 2. URGENCY */}
                 <FlashDeal
                     title="پیشنهاد ویژه امروز"
                     description="تا پایان این تخفیف فرصت داری"
-                    endDate="2026-05-17T23:59:00"
+                    endDate="2026-05-16T23:59:00"
                     href="/products/premium"
                 />
-                <MobileHotDealsSection products={mockProducts} />
 
+                {/* 3. IMPULSE */}
+                <MobileHotDealsSection products={dealProducts} />
 
+                {/* 4. DISCOVERY */}
                 <MobileNewsSection />
+
+                {/* 5. SOCIAL PROOF */}
                 <MobileMostViewed />
+
+                {/* 6. TRUST */}
                 <MobileInfoSection />
 
             </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { newestProducts } from "./mock";
+import { newProducts } from "./mock";
 import HomeSliderSection from "./homeProductSlider";
 
 export default function MobileNewsSection() {
@@ -8,7 +8,7 @@ export default function MobileNewsSection() {
         <HomeSliderSection
             title="جدیدترین‌ها"
             href="/products/new"
-            products={newestProducts}
+            products={newProducts}
             icon="new"
         />
 

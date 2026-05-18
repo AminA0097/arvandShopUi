@@ -1,255 +1,79 @@
-// features/home/data/mock.ts
+import {SharedProduct} from "@/features/home/components/mobile/productCard";
 
-import { ProductViewModel } from "@/features/shop/types/productMapper";
-
-export const newestProducts: ProductViewModel[] = [
+const newProducts: SharedProduct[] = [
     {
-        id: "1",
-        name: "کیف دستی چرم کلاسیک",
-        title: "کیف دستی چرم کلاسیک",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 2890000,
-        originalPrice: 3490000,
-        hasDiscount: true,
-        discountPercent: 18,
-        isNew: true,
-        isBestSeller: false,
-        stock: 12,
-        views: 420,
-        category: "bags",
-        categoryLabel: "کیف",
-        type: "handbag",
-        typeLabel: "دستی",
-        tags: ["natural-leather", "premium"],
-        tagLabels: ["چرم طبیعی", "پریمیوم"],
-        isOutOfStock: false,
-    },
-
-    {
-        id: "2",
-        name: "کفش رسمی مردانه",
-        title: "کفش رسمی مردانه",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 4190000,
-        originalPrice: 4190000,
-        hasDiscount: false,
-        discountPercent: 0,
-        isNew: true,
-        isBestSeller: true,
-        stock: 8,
-        views: 910,
-        category: "shoes",
-        categoryLabel: "کفش",
-        type: "formal",
-        typeLabel: "رسمی",
-        tags: ["luxury", "handmade"],
-        tagLabels: ["لوکس", "دست‌دوز"],
-        isOutOfStock: false,
-    },
-
-    {
-        id: "3",
-        name: "کمربند مینیمال",
-        title: "کمربند مینیمال",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 990000,
-        originalPrice: 1290000,
-        hasDiscount: true,
-        discountPercent: 24,
-        isNew: true,
-        isBestSeller: false,
-        stock: 20,
-        views: 280,
-        category: "accessories",
-        categoryLabel: "اکسسوری",
-        type: "belt",
-        typeLabel: "کمربند",
-        tags: ["minimal", "natural-leather"],
-        tagLabels: ["مینیمال", "چرم طبیعی"],
-        isOutOfStock: false,
+        id: "new-1",
+        name: "محصول جدید ۱",
+        price: 250000,
+        image: "/products/accessory-1.jpg",
+        href: "/product/new-1"
     },
     {
-        id: "4",
-        name: "کمربند مینیمال",
-        title: "کمربند مینیمال",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 990000,
-        originalPrice: 1290000,
-        hasDiscount: true,
-        discountPercent: 24,
-        isNew: true,
-        isBestSeller: false,
-        stock: 20,
-        views: 280,
-        category: "accessories",
-        categoryLabel: "اکسسوری",
-        type: "belt",
-        typeLabel: "کمربند",
-        tags: ["minimal", "natural-leather"],
-        tagLabels: ["مینیمال", "چرم طبیعی"],
-        isOutOfStock: false,
+        id: "new-2",
+        title: "محصول تازه وارد", // Using title instead of name
+        price: 320000,
+        oldPrice: 450000,
+        image: "/products/accessory-1.jpg",
+        href: "/product/new-2"
     },
     {
-        id: "5",
-        name: "کمربند مینیمال",
-        title: "کمربند مینیمال",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 990000,
-        originalPrice: 1290000,
-        hasDiscount: true,
-        discountPercent: 24,
-        isNew: true,
-        isBestSeller: false,
-        stock: 20,
-        views: 280,
-        category: "accessories",
-        categoryLabel: "اکسسوری",
-        type: "belt",
-        typeLabel: "کمربند",
-        tags: ["minimal", "natural-leather"],
-        tagLabels: ["مینیمال", "چرم طبیعی"],
-        isOutOfStock: false,
-    },
-    {
-        id: "6",
-        name: "کمربند مینیمال",
-        title: "کمربند مینیمال",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 990000,
-        originalPrice: 1290000,
-        hasDiscount: true,
-        discountPercent: 24,
-        isNew: true,
-        isBestSeller: false,
-        stock: 20,
-        views: 280,
-        category: "accessories",
-        categoryLabel: "اکسسوری",
-        type: "belt",
-        typeLabel: "کمربند",
-        tags: ["minimal", "natural-leather"],
-        tagLabels: ["مینیمال", "چرم طبیعی"],
-        isOutOfStock: false,
-    },
-    {
-        id: "7",
-        name: "کمربند مینیمال",
-        title: "کمربند مینیمال",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 990000,
-        originalPrice: 1290000,
-        hasDiscount: true,
-        discountPercent: 24,
-        isNew: true,
-        isBestSeller: false,
-        stock: 20,
-        views: 280,
-        category: "accessories",
-        categoryLabel: "اکسسوری",
-        type: "belt",
-        typeLabel: "کمربند",
-        tags: ["minimal", "natural-leather"],
-        tagLabels: ["مینیمال", "چرم طبیعی"],
-        isOutOfStock: false,
-    },
+        id: "new-3",
+        name: "محصول جدید ۳",
+        price: 189000,
+        image: "/products/accessory-1.jpg"
+        // href is missing - will use fallback
+    }
 ];
 
-export const mostViewedProducts: ProductViewModel[] = [
+// Sample data for MOST VIEWED products
+const mostViewedProducts: SharedProduct[] = [
     {
-        id: "4",
-        name: "کیف دوشی زنانه",
-        title: "کیف دوشی زنانه",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 3590000,
-        originalPrice: 3990000,
-        hasDiscount: true,
-        discountPercent: 10,
-        isNew: false,
-        isBestSeller: true,
-        stock: 5,
-        views: 1840,
-        category: "bags",
-        categoryLabel: "کیف",
-        type: "shoulder-bag",
-        typeLabel: "دوشی",
-        tags: ["best-seller", "premium"],
-        tagLabels: ["پرفروش", "پریمیوم"],
-        isOutOfStock: false,
-    },
-
-    {
-        id: "5",
-        name: "بوت چرمی زمستانی",
-        title: "بوت چرمی زمستانی",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 5290000,
-        originalPrice: 6290000,
-        hasDiscount: true,
-        discountPercent: 16,
-        isNew: false,
-        isBestSeller: true,
-        stock: 2,
-        views: 2310,
-        category: "shoes",
-        categoryLabel: "کفش",
-        type: "boots",
-        typeLabel: "بوت",
-        tags: ["winter", "luxury"],
-        tagLabels: ["زمستانه", "لوکس"],
-        isOutOfStock: false,
-    },
-
-    {
-        id: "6",
-        name: "کیف لپ‌تاپ چرمی",
-        title: "کیف لپ‌تاپ چرمی",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 4790000,
-        originalPrice: 4790000,
-        hasDiscount: false,
-        discountPercent: 0,
-        isNew: false,
-        isBestSeller: true,
-        stock: 0,
-        views: 3120,
-        category: "bags",
-        categoryLabel: "کیف",
-        type: "laptop-bag",
-        typeLabel: "لپ‌تاپ",
-        tags: ["office", "premium"],
-        tagLabels: ["اداری", "پریمیوم"],
-        isOutOfStock: true,
+        id: "viewed-1",
+        name: "پرفروش‌ترین ۱",
+        price: 450000,
+        image: "/products/accessory-1.jpg",
+        href: "/product/trending-1"
     },
     {
-        id: "7",
-        name: "کیف لپ‌تاپ چرمی",
-        title: "کیف لپ‌تاپ چرمی",
-        imgUrl:
-            "/images/womens-category.jpg",
-        finalPrice: 4790000,
-        originalPrice: 4790000,
-        hasDiscount: false,
-        discountPercent: 0,
-        isNew: false,
-        isBestSeller: true,
-        stock: 0,
-        views: 3120,
-        category: "bags",
-        categoryLabel: "کیف",
-        type: "laptop-bag",
-        typeLabel: "لپ‌تاپ",
-        tags: ["office", "premium"],
-        tagLabels: ["اداری", "پریمیوم"],
-        isOutOfStock: true,
-    },
+        id: "viewed-2",
+        name: "محبوب ۲",
+        price: 890000,
+        oldPrice: 1200000,
+        discount: 26,
+        image: "/products/accessory-1.jpg",
+        href: "/product/trending-2"
+    }
+    // Some products might be null/undefined
 ];
+
+// Sample data for DEALS (with missing fields)
+const dealProducts: SharedProduct[] = [
+    {
+        id: "deal-1",
+        name: "کیف شماره سه",
+        price: 99000,
+        oldPrice: 299000,
+        image: "/products/bag-1.jpg",
+        href: "/product/deal-1"
+    },
+    {
+        id: "deal-2",
+        name : "کیف شماره دو",
+        price: 149000,
+        oldPrice: 499000,
+        image: "/products/bag-2.jpg"
+        // href is missing - will use fallback
+    },
+    null as any, // Invalid product - will be filtered out
+    {
+        id: "deal-3",
+        name: "کیف شماره یک",
+        price: 199000,
+        oldPrice: 790000,
+        discount: 75,
+        image: "/products/bag-3.jpg",
+        href: "/product/deal-3"
+    }
+];
+
+export {dealProducts, mostViewedProducts , newProducts};
