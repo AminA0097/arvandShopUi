@@ -1,25 +1,38 @@
 @import "tailwindcss";
 
 :root {
-    --bg: #ffffff;
+    --bg: #fefcf9;
+    --bg-gradient: linear-gradient(135deg, #fefcf9 0%, #fbf7f4 100%);
 
-    --surface: #f7f5f3;
-    --surface-2: #efe8e4;
+    --surface: #faf5f0;
+    --surface-2: #f3ebe5;
+    --surface-3: #e8dfd8;
 
     --primary: #9a8174;
-    --primary-hover: #7e685d;
+    --primary-light: #b59a8b;
+    --primary-dark: #7e685d;
+    --primary-gradient: linear-gradient(135deg, #9a8174 0%, #7e685d 100%);
 
-    --text: #1f1f1f;
-    --text-muted: #6b6b6b;
+    --text: #1a1817;
+    --text-secondary: #4a3f3a;
+    --text-muted: #8a7a72;
 
-    --border: rgba(0, 0, 0, 0.08);
+    --border: rgba(154, 129, 116, 0.12);
+    --border-heavy: rgba(154, 129, 116, 0.2);
 
-    --shadow:
-            0 10px 30px rgba(0, 0, 0, 0.06);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+    --shadow-primary: 0 8px 20px rgba(154, 129, 116, 0.15);
 
-    --radius: 18px;
+    --radius-sm: 12px;
+    --radius-md: 18px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
 
-
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 @theme{
     --font-shabnam: var(--font-shabnam);
@@ -131,4 +144,22 @@ select {
     padding: 4px 10px;
     border-radius: 999px;
     font-size: 12px;
+}
+/* Custom scrollbar - warm theme */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: var(--surface-2);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--primary-light);
+    border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }

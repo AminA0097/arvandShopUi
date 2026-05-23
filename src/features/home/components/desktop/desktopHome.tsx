@@ -12,7 +12,7 @@ const slides = [
         title: "رویداد اختصاصی چرم آروند در اقدسیه",
         description:
             "تجربه‌ای متفاوت از کالکشن جدید محصولات چرمی با تخفیف ویژه و معرفی طراحی‌های جدید فصل.",
-        backgroundImage: "/images/accessory-category.jpg",
+        backgroundImage: "/images/accessory-categories.jpg",
         floatingImage:null,
         badge: "📍 رویداد حضوری ویژه",
         coupon: "AGHDASIEH25",
@@ -27,7 +27,7 @@ const slides = [
         title: "کالکشن جدید چرم طبیعی آروند",
         description:
             "طراحی‌های مدرن با چرم طبیعی درجه یک، ترکیب ظرافت و دوام برای استایل روزمره و رسمی.",
-        backgroundImage: "/images/accessory-category.jpg",
+        backgroundImage: "/images/accessory-categories.jpg",
         floatingImage:null,
         badge: "✨ New Collection",
         coupon: "ARVAND25",
@@ -42,7 +42,7 @@ const slides = [
         title: "حراج بزرگ تابستانی",
         description:
             "تا ۴۰٪ تخفیف برای کیف، کفش و اکسسوری‌های منتخب. فرصت محدود برای ارتقای استایل.",
-        backgroundImage: "/images/accessory-category.jpg",
+        backgroundImage: "/images/accessory-categories.jpg",
         floatingImage:null,
         badge: "🔥 Summer Sale",
         coupon: "SUMMER40",
@@ -57,7 +57,7 @@ const slides = [
         title: "کفش‌های رسمی مردانه نسل جدید",
         description:
             "ترکیب راحتی، دوام و استایل کلاسیک با چرم طبیعی و طراحی ارگونومیک.",
-        backgroundImage: "/images/accessory-category.jpg",
+        backgroundImage: "/images/accessory-categories.jpg",
         floatingImage:null,
         badge: "👞 Men Collection",
         coupon: "FORMAL15",
@@ -72,7 +72,7 @@ const slides = [
         title: "اکسسوری‌های چرمی لوکس",
         description:
             "کمربند، کیف پول و اکسسوری‌های خاص برای استایل حرفه‌ای و مینیمال.",
-        backgroundImage: "/images/accessory-category.jpg",
+        backgroundImage: "/images/accessory-categories.jpg",
         floatingImage:null,
         badge: "💼 Luxury Accessories",
         coupon: "LUX10",

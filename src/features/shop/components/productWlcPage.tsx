@@ -10,7 +10,7 @@ const products = Array.from({ length: 20 }).map((_, i) => ({
     id: i + 1,
     title: `محصول ویژه ${i + 1}`,
     price: "۲,۴۰۰,۰۰۰",
-    image: "/images/mens-category.jpg",
+    image: "/images/mens-categories.jpg",
 }));
 
 export default function ProductWlcPage() {

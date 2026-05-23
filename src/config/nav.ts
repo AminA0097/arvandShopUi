@@ -37,7 +37,7 @@ export const desktopNavItems = [
     },
     {
         label: "زنانه",
-        href: "/products/womens",
+        href: "/products/women",
         children: [
             {
                 label: "کیف",
@@ -87,7 +87,7 @@ export const mobileNavItems = [
     },
     {
         label: "دسته بندی",
-        href: "/category",
+        href: "/categories",
         icon: ShoppingBag,
     },
     {

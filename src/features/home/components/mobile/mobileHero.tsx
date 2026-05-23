@@ -15,7 +15,7 @@ type HeroItem = {
     href?: string | null;
     duration?: number;
 
-    /* event fields */
+    /* events fields */
     badge?: string | null;
     location?: string | null;
     date?: string | null;

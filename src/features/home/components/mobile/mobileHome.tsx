@@ -1,116 +1,200 @@
 "use client";
 
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+// import { } from "../../hooke/userBanner";
+// Components
 import HeroWrapper from "./heroWrapper";
+import MobileCategoryGrid from "./mobileCategoryGrid";
+import MobileTrustStrip from "./mobileTrustStrip";
+import FlashDeal from "./flashDeal";
+import MobileNewsSection from "./mobileNewsSection";
+import MobileHotDealsSection from "./mobileHotDealsSection";
 import MobileMostViewed from "./mobileMostViewed";
 import MobileInfoSection from "./mobileInfoSection";
-import MobileNewsSection from "./mobileNewsSection";
 
-import FlashDeal from "@/features/home/components/mobile/flashDeal";
-import MobileHotDealsSection from "@/features/home/components/mobile/mobileHotDealsSection.";
-import MobileTrustStrip from "@/features/home/components/mobile/mobileTrustStrip";
+// Mock data
+import { dealProducts, newProducts, mostViewedProducts } from "./mock";
+import {useBanner} from "@/features/home/hooke/useBanner";
 
-import { dealProducts , newProducts , mostViewedProducts } from "./mock"
-/* ---- mock API response ---- */
 
-const heroResponse = {
-    type: "event",
-    payload: {
-        id: "event-1",
-        title: "رویداد رونمایی کالکشن پاییزه",
-        description: "تجربه‌ای متفاوت از طراحی‌های جدید",
-        backgroundImage: "/images/event.jpg",
-        href: null,
-        badge: "رویداد حضوری",
-        location: "تهران",
-        date: "2 تا 8 خرداد",
-        coupon: "FALL25",
-        eventStart: "2026-05-23T18:00:00",
-        btnText: null,
-    },
-} as const;
-
-interface Productt {
-    id: string;
-    name: string;
-    price: number;
-    oldPrice?: number;
-    image: string;
-    discount?: number;
-}
-
-export const mockProducts: Productt[] = [
-    {
-        id: "1",
-        name: "کیف دوشی چرم طبیعی آروند",
-        price: 1450000,
-        oldPrice: 1890000,
-        discount: 23,
-        image: "/products/bag-1.jpg",
-    },
-    {
-        id: "2",
-        name: "کمربند چرم مردانه کلاسیک",
-        price: 420000,
-        oldPrice: 520000,
-        discount: 19,
-        image: "/products/accessory-1.jpg",
-    },
-    {
-        id: "3",
-        name: "کیف پول چرم دست‌دوز",
-        price: 680000,
-        oldPrice: 820000,
-        discount: 17,
-        image: "/products/accessory-2.jpg",
-    },
-    {
-        id: "4",
-        name: "کیف اداری چرم لوکس",
-        price: 2450000,
-        oldPrice: 3100000,
-        discount: 21,
-        image: "/products/bag-2.jpg",
-    },
-];
-
-export default function MobileHome() {
+// Loading skeleton
+function HomeSkeleton() {
     return (
-        <div className="relative min-h-screen overflow-hidden bg-[var(--bg)]">
+        <div className="space-y-6 px-4 pb-8 pt-5">
+            {/* Hero skeleton */}
+            <div className="h-[400px] animate-pulse rounded-2xl bg-[var(--surface-2)]" />
 
-            {/* background */}
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-                <div className="absolute left-[-80px] top-32 h-72 w-72 rounded-full bg-[var(--primary)]/5 blur-3xl" />
-                <div className="absolute right-[-120px] top-[40%] h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+            {/* Trust strip skeleton */}
+            <div className="flex justify-between gap-4">
+                {[1, 2, 3, 4].map(i => (
+                    <div key={i} className="h-16 flex-1 animate-pulse rounded-xl bg-[var(--surface-2)]" />
+                ))}
             </div>
 
-            <div className="relative z-10 px-4 pb-16 pt-5 space-y-10">
+            {/* Categories skeleton */}
+            <div className="grid grid-cols-3 gap-3">
+                {[1, 2, 3, 4, 5, 6].map(i => (
+                    <div key={i} className="h-24 animate-pulse rounded-2xl bg-[var(--surface-2)]" />
+                ))}
+            </div>
+        </div>
+    );
+}
 
-                {/* 1. HOOK */}
-                <div className="space-y-5">
-                    <HeroWrapper hero={heroResponse} />
-                    <MobileTrustStrip />
-                </div>
+export default function MobileHome() {
+    const [isLoading, setIsLoading] = useState(true);
+    const [scrolled, setScrolled] = useState(false);
 
-                {/* 2. URGENCY */}
-                <FlashDeal
-                    title="پیشنهاد ویژه امروز"
-                    description="تا پایان این تخفیف فرصت داری"
-                    endDate="2026-05-16T23:59:00"
-                    href="/products/premium"
-                />
+    const { banners, loading } = useBanner();
 
-                {/* 3. IMPULSE */}
-                <MobileHotDealsSection products={dealProducts} />
+    useEffect(() => {
+        // Simulate initial load
+        const timer = setTimeout(() => setIsLoading(false), 800);
 
-                {/* 4. DISCOVERY */}
-                <MobileNewsSection />
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 100);
+        };
 
-                {/* 5. SOCIAL PROOF */}
-                <MobileMostViewed />
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            clearTimeout(timer);
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
-                {/* 6. TRUST */}
-                <MobileInfoSection />
+    if (isLoading) {
+        return <HomeSkeleton />;
+    }
 
+    return (
+        <div className="relative min-h-screen overflow-hidden bg-[var(--bg)] pb-24">
+
+            {/* Background decorative elements */}
+            <div className="pointer-events-none fixed inset-0 overflow-hidden">
+                <div className="absolute -left-20 top-32 h-72 w-72 rounded-full bg-[var(--primary)]/5 blur-3xl" />
+                <div className="absolute -right-20 top-[40%] h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+                <div className="absolute bottom-20 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-[var(--primary)]/5 blur-3xl" />
+            </div>
+
+            {/* Main content with narrative flow */}
+            <div className="relative z-10 space-y-8 px-4 pb-8 pt-5">
+
+                {/* CHAPTER 1: FIRST IMPRESSION - Hero & Trust */}
+                <AnimatePresence mode="wait">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                        {/* اینجا بنرهایی که از هوک گرفتیم رو پاس میدیم */}
+                        <HeroWrapper banners={banners} />
+                        <MobileTrustStrip />
+                    </motion.div>
+
+                </AnimatePresence>
+
+                {/* CHAPTER 2: DISCOVERY - Categories */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.2 }}
+                >
+                    <MobileCategoryGrid />
+                </motion.div>
+
+                {/* CHAPTER 3: URGENCY - Flash Deals */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.3 }}
+                >
+                    <FlashDeal
+                        title="شگفت‌انگیز هفته"
+                        description="فرصت رو از دست نده!"
+                        endDate="2026-05-10T23:59:00"
+                        href="/products/flash-deal"
+                    />
+                </motion.div>
+
+                {/* CHAPTER 4: NEW ARRIVALS - Fresh Products */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.4 }}
+                >
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-2 px-1">
+                            <div className="h-1 w-8 rounded-full bg-[var(--primary)]" />
+                            <h2 className="text-sm font-medium text-[var(--text-muted)]">
+                                تازه‌های بازار
+                            </h2>
+                        </div>
+                        <MobileNewsSection />
+                    </div>
+                </motion.div>
+
+                {/* CHAPTER 5: BEST DEALS - Hot Discounts */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.5 }}
+                >
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-2 px-1">
+                            <div className="h-1 w-8 rounded-full bg-[var(--primary)]" />
+                            <h2 className="text-sm font-medium text-[var(--text-muted)]">
+                                بهترین تخفیف‌ها
+                            </h2>
+                        </div>
+                        <MobileHotDealsSection products={dealProducts} />
+                    </div>
+                </motion.div>
+
+                {/* CHAPTER 6: SOCIAL PROOF - Most Viewed */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: 0.6 }}
+                >
+                    <div className="space-y-2">
+                        <div className="flex items-center gap-2 px-1">
+                            <div className="h-1 w-8 rounded-full bg-[var(--primary)]" />
+                            <h2 className="text-sm font-medium text-[var(--text-muted)]">
+                                پرطرفدارترین‌ها
+                            </h2>
+                        </div>
+                        <MobileMostViewed />
+                    </div>
+                </motion.div>
+
+                {/* CHAPTER 7: FOOTER - About & Contact */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.7 }}
+                >
+                    <MobileInfoSection />
+                </motion.div>
+
+                {/* Back to top button */}
+                <AnimatePresence>
+                    {scrolled && (
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.8 }}
+                            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                            className="fixed bottom-24 left-4 z-50 rounded-full bg-[var(--primary)] p-3 text-white shadow-lg"
+                        >
+                            <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                        </motion.button>
+                    )}
+                </AnimatePresence>
             </div>
         </div>
     );

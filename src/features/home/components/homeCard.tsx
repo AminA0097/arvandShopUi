@@ -93,7 +93,7 @@ export default function HomeProductCard({ product, index }: Props) {
                     {/* content */}
                     <div className="space-y-2 p-3">
 
-                        {/* category + views */}
+                        {/* categories + views */}
                         <div className="flex items-center justify-between text-[10px] text-[var(--text-muted)]">
                             <span>{product.categoryLabel}</span>
 

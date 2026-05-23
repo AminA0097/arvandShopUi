@@ -1,9 +1,9 @@
 // features/shop/types/productType.ts
 
-export type MainCategoryName = "mens" | "womens" | "accessory";
+export type MainCategoryName = "mens" | "women" | "accessory";
 export type StockType = "all" | "inStock" | "outOfStock";
 export type ProductType = "bag" | "shoes" | "cloths" | "belt" | "hats" | "wallet" | "other";
-export type Audience = "mens" | "womens" | "unisex";
+export type Audience = "mens" | "women" | "unisex";
 export type ProductTag = "premium" | "leather" | "new" | "hot" | "summer";
 export type SortType = "latest" | "popular" | "price_asc" | "price_desc";
 

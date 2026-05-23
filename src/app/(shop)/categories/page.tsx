@@ -2,28 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-
 import { motion } from "framer-motion";
-
 import {
     Package,
     ArrowLeft,
-    Sparkles,
-    Shield,
-    Truck,
+
 } from "lucide-react";
 
-import {
-    categories,
-    getCategoryRoute,
-    getCategoryTypeRoute,
-    TYPE_LABELS,
-} from "@/features/shop/types/ProductQuery";
+import {categoriesList, getCategoryRoute, getCategoryTypeRoute, TYPE_CONFIG} from "@/shared/types/config"
 
 export default function ProductMobileCategories() {
+
     return (
         <div className="container mx-auto px-4 py-12 md:py-20">
-            {/* Hero */}
             <motion.div
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -31,7 +22,7 @@ export default function ProductMobileCategories() {
             >
                 <h1 className="text-3xl md:text-5xl font-bold text-[var(--text)] mb-4 font-shabnam">
                     محصولات{" "}
-                    <span className="text-[var(--primary)]">
+                    <span className="text-[var(--primary)] font-shabnam">
                         آروند
                     </span>
                 </h1>
@@ -50,76 +41,9 @@ export default function ProductMobileCategories() {
                     مجموعه‌ای از محصولات چرمی طبیعی با طراحی مدرن،
                     کیفیت ماندگار و ضمانت اصالت کالا
                 </p>
-
-                {/* Features */}
-                {/*<div className="flex flex-wrap justify-center gap-8 mt-10">*/}
-                {/*    {[*/}
-                {/*        {*/}
-                {/*            icon: Truck,*/}
-                {/*            label: "ارسال رایگان",*/}
-                {/*            desc: "برای سفارش‌های ویژه",*/}
-                {/*        },*/}
-                {/*        {*/}
-                {/*            icon: Shield,*/}
-                {/*            label: "ضمانت اصالت",*/}
-                {/*            desc: "بازگشت تا ۷ روز",*/}
-                {/*        },*/}
-                {/*        {*/}
-                {/*            icon: Sparkles,*/}
-                {/*            label: "چرم طبیعی",*/}
-                {/*            desc: "کیفیت ممتاز",*/}
-                {/*        },*/}
-                {/*    ].map((feature, i) => (*/}
-                {/*        <motion.div*/}
-                {/*            key={feature.label}*/}
-                {/*            initial={{ opacity: 0, y: 14 }}*/}
-                {/*            animate={{ opacity: 1, y: 0 }}*/}
-                {/*            transition={{ delay: i * 0.1 }}*/}
-                {/*            className="flex items-center gap-3"*/}
-                {/*        >*/}
-                {/*            <div*/}
-                {/*                className="*/}
-                {/*                    p-3*/}
-                {/*                    rounded-2xl*/}
-                {/*                    bg-[var(--surface)]*/}
-                {/*                    border*/}
-                {/*                    border-[var(--border)]*/}
-                {/*                    text-[var(--primary)]*/}
-                {/*                "*/}
-                {/*            >*/}
-                {/*                <feature.icon size={20} />*/}
-                {/*            </div>*/}
-                
-                {/*            <div className="text-right">*/}
-                {/*                <p*/}
-                {/*                    className="*/}
-                {/*                        text-sm*/}
-                {/*                        font-bold*/}
-                {/*                        text-[var(--text)]*/}
-                {/*                        font-shabnam*/}
-                {/*                    "*/}
-                {/*                >*/}
-                {/*                    {feature.label}*/}
-                {/*                </p>*/}
-                
-                {/*                <p*/}
-                {/*                    className="*/}
-                {/*                        text-xs*/}
-                {/*                        text-[var(--text-muted)]*/}
-                {/*                        font-shabnam*/}
-                {/*                    "*/}
-                {/*                >*/}
-                {/*                    {feature.desc}*/}
-                {/*                </p>*/}
-                {/*            </div>*/}
-                {/*        </motion.div>*/}
-                {/*    ))}*/}
-                {/*</div>*/}
             </motion.div>
-
-            {/* Categories */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
-                {categories.map((category, idx) => (
+                {categoriesList.map((category, idx) => (
                     <motion.div
                         key={category.name}
                         initial={{ opacity: 0, y: 28 }}
@@ -241,13 +165,10 @@ export default function ProductMobileCategories() {
                                                         transition-all
                                                         duration-300
                                                         cursor-pointer
+                                                        font-shabnam
                                                     "
                                                 >
-                                                    {
-                                                        TYPE_LABELS[
-                                                            type
-                                                            ]
-                                                    }
+                                                    {TYPE_CONFIG[type]?.label || type}
                                                 </span>
                                             </Link>
                                         )

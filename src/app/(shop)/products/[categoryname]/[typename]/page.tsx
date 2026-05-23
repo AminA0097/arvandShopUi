@@ -31,7 +31,7 @@ async function getProducts(category: string, type: ProductType): Promise<Product
         stock: i % 5 === 0 ? 0 : 5,
         isNew: i % 4 === 0,
         isBestSeller: i % 6 === 0,
-        imgUrl: "/images/mens-category.jpg",
+        imgUrl: "/images/mens-categories.jpg",
         views: Math.floor(Math.random() * 1000),
         rank: i + 1,
         createdAt: new Date().toISOString(),
@@ -52,7 +52,7 @@ export default async function CategoryTypePage({ params, searchParams }: Props) 
         notFound();
     }
 
-    // Check if the type is valid for this category
+    // Check if the type is valid for this categories
     const isValidType = category.allowedTypes.includes(typename as ProductType);
     if (!isValidType) {
         notFound();

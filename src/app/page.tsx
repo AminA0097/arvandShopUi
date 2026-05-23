@@ -6,7 +6,6 @@ import DesktopHome from "@/features/home/components/desktop/desktopHome";
 export default function HomePage() {
     return (
         <>
-            {/* mobile */}
             <div className="lg:hidden">
                 <MobileHome />
             </div>

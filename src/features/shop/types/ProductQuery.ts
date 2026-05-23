@@ -71,21 +71,21 @@ export const CATEGORY_CONFIG: Record<MainCategoryName, CategoryConfig> = {
         slug: "mens",
         label: "مردانه",
         description: "بهترین محصولات مردانه",
-        image: "/images/mens-category.jpg",
+        image: "/images/mens-categories.jpg",
         allowedTypes: ["bag", "shoes", "cloths", "belt", "hats"],
     },
-    womens: {
-        slug: "womens",
+    women: {
+        slug: "women",
         label: "زنانه",
         description: "بهترین محصولات زنانه",
-        image: "/images/womens-category.jpg",
+        image: "/images/womens-categories.jpg",
         allowedTypes: ["bag", "shoes", "cloths", "belt", "hats"],
     },
     accessory: {
         slug: "accessory",
         label: "اکسسوری",
         description: "اکسسوری‌های چرمی خاص",
-        image: "/images/accessory-category.jpg",
+        image: "/images/accessory-categories.jpg",
         allowedTypes: ["belt", "wallet", "hats", "other"],
     },
 };
@@ -93,7 +93,8 @@ export const CATEGORY_CONFIG: Record<MainCategoryName, CategoryConfig> = {
 /**
  * Derived UI list
  */
-export const categories = Object.entries(CATEGORY_CONFIG).map(([name, config]) => ({
+export const categories = Object.entries(CATEGORY_CONFIG)
+    .map(([name, config]) => ({
     name: name as MainCategoryName,
     ...config,
 }));

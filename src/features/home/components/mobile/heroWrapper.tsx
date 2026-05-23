@@ -1,29 +1,23 @@
 "use client";
 
-import Hero from "./hero";
-import SimpleBanner from "./simpleBanner";
+import MobileHeroSlider from "./mobileHeroSlider";
 
-import { HeroItem } from "../../type/heroItem";
-
-type HeroResponse =
-    | { type: "event"; payload: HeroItem }
-    | { type: "banner"; payload: HeroItem };
-
-type Props = {
-    hero: HeroResponse | null;
+type BannerItem = {
+    id: string;
+    title: string;
+    description?: string | null;
+    backgroundImage: string;
+    href?: string | null;
+    btnText?: string | null;
+    badge?: string | null;
 };
 
-export default function HeroWrapper({ hero }: Props) {
-    if (!hero) return null;
+type Props = {
+    banners: BannerItem[];
+};
 
-    switch (hero.type) {
-        case "event":
-            return <Hero item={hero.payload} />;
+export default function HeroWrapper({ banners }: Props) {
+    if (!banners || banners.length === 0) return null;
 
-        case "banner":
-            return <SimpleBanner item={hero.payload} />;
-
-        default:
-            return null;
-    }
+    return <MobileHeroSlider banners={banners} autoPlayInterval={5000} />;
 }

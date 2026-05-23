@@ -57,7 +57,7 @@ export default function SidebarFilters({
             params.append("sort", filters.sort);
         }
 
-        // فقط در صورتی که در صفحه اصلی category هستیم و showTypeFilter true است
+        // فقط در صورتی که در صفحه اصلی categories هستیم و showTypeFilter true است
         if (showTypeFilter && filters.types.length > 0) {
             params.append("types", filters.types.join(","));
         }

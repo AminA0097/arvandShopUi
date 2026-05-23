@@ -3,6 +3,7 @@
 import type { Metadata } from "next";
 import "./global.css";
 
+
 import {
     shabnam,
     tanha,
@@ -10,13 +11,14 @@ import {
     mosalas,
 } from "@/shared/utils/fonts";
 
-import DesktopHeader from "@/features/home/components/desktop/desktop-header";
-import MobileFooterNav from "@/features/home/components/mobile/mobile-footer-nav";
-import MobileHomeHeader from "@/features/home/components/mobile/mobileHomeHeader";
+import DesktopHeader from "@/shared/components/layout/desktop-header";
+import MobileFooterNav from "@/shared/components/layout/mobile-footer-nav";
+import MobileHomeHeader from "@/shared/components/layout/mobileHomeHeader";
+import ToastProvider from "@/shared/utils/ToastProvider";
 
 export const metadata: Metadata = {
-    title: "ZENN",
-    description: "Luxury modern commerce",
+    title: "چرم آروند",
+    description: "Arvand Leather",
 };
 
 export default function RootLayout({
@@ -35,6 +37,7 @@ export default function RootLayout({
                     bg-[#f7f5f3]
                 `}
         >
+        <ToastProvider />
         {/* desktop */}
         <div className="hidden lg:block">
             <DesktopHeader />

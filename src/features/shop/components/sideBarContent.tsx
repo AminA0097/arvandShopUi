@@ -46,7 +46,7 @@ export default function SidebarContent({
                 <SortDropdown value={filters.sort} onChange={(v) => update("sort", v)} />
             </div>
 
-            {/* Product Type Filter - فقط در صفحه اصلی category نشان داده شود */}
+            {/* Product Type Filter - فقط در صفحه اصلی categories نشان داده شود */}
             {showTypeFilter && allowedTypes && allowedTypes.length > 0 && (
                 <div>
                     <label className="text-sm mb-2 block text-stone-700">نوع دسته‌بندی</label>

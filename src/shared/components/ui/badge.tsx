@@ -17,26 +17,21 @@ const badgeVariants = cva(
     {
         variants: {
             variant: {
-                primary:
-                    "bg-[#9a8174] text-white",
+                primary: "bg-[#9a8174] text-white",
 
-                secondary:
-                    "bg-[#f3f0ed] text-[#1f1f1f] border border-black/5",
+                notification: "bg-[#ef4444] text-white shadow-sm",
 
-                outline:
-                    "border border-[#9a8174]/30 bg-white text-[#9a8174]",
+                secondary: "bg-[#f3f0ed] text-[#1f1f1f] border border-black/5",
 
-                success:
-                    "bg-emerald-100 text-emerald-700",
+                outline: "border border-[#9a8174]/30 bg-white text-[#9a8174]",
 
-                danger:
-                    "bg-red-100 text-red-700",
+                success: "bg-emerald-100 text-emerald-700",
 
-                warning:
-                    "bg-amber-100 text-amber-700",
+                danger: "bg-red-100 text-red-700",
 
-                dark:
-                    "bg-[#1f1f1f] text-white",
+                warning: "bg-amber-100 text-amber-700",
+
+                dark: "bg-[#1f1f1f] text-white",
             },
 
             size: {

@@ -31,7 +31,7 @@ async function getProducts(category: string, typeFilter?: string[]): Promise<Pro
         stock: i % 5 === 0 ? 0 : 5,
         isNew: i % 4 === 0,
         isBestSeller: i % 6 === 0,
-        imgUrl: "/images/mens-category.jpg",
+        imgUrl: "/images/mens-categories.jpg",
         views: Math.floor(Math.random() * 1000),
         rank: i + 1,
         createdAt: new Date().toISOString(),
