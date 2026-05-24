@@ -1,0 +1,13 @@
+.error-container {
+    min-height: 20px;
+    margin-top: 4px;
+}
+
+.error-text {
+    display: inline-block;
+    direction: rtl;
+    unicode-bidi: plaintext;
+    color: #f87171; /* red-400 */
+    font-size: 0.875rem;
+    line-height: 1.2rem;
+}

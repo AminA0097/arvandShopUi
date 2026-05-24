@@ -12,7 +12,7 @@ import { useState } from "react";
 // ایمپورت هوک سبد خرید - مسیر رو اگه متفاوته اصلاح کن
 // import { useShoppingCart } from "@/features/shop/hooks/useShoppingCart";
 import { desktopNavItems } from "@/config/nav";
-import Badge from "@/shared/components/ui/badge";
+import Badge from "@/shared/components/ui/Badge";
 import { useEvents } from "@/features/shop/hooks/useEvents";
 
 export default function DesktopHeader() {
